@@ -1,0 +1,59 @@
+﻿@model PSCafeFO.Models.Masalar
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Masalar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MasaTuru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MasaTuru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AcilisSaat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcilisSaat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KapanisSaat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KapanisSaat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fiyat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Durum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Durum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

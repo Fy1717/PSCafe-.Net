@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PSCafeFO.Models.Masalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p style="padding-left:71%;">
+    @Html.ActionLink("MASA EKLE", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+
+
+@foreach (var item in Model)
+{
+<div class="card col-sm-3">
+
+    <div class="info ">
+        <div class="name">MASA-@item.Id</div>
+        <div class="prof">@Html.DisplayFor(modelItem => item.MasaTuru)</div>
+        <div class="divider"></div>
+        <div class="bio">
+            AÇILIŞ   :  @(item.AcilisSaat.Value.ToString("hh.mm"))     <br />
+            KAPANIŞ  :  @(item.KapanisSaat.Value.ToString("hh.mm"))    <br /><br />
+            <strong>@(item.Durum == true ? "AÇIK" : "KAPALI")</strong> <br />
+        </div>
+        <button>@Html.ActionLink(item.Durum == true ? "MASA KAPAT" : "MASA AÇ","Edit", new { id = item.Id })</button>
+
+    </div>
+    <div class="detSil">
+        @Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+    </div>
+   
+
+
+
+
+</div>
+}
+
+
+
+
+
+

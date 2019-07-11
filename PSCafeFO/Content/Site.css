@@ -1,0 +1,104 @@
+﻿body {
+    padding: 60px;
+    background-color: #fabe58;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.card {
+    background-color: white;
+    height: 400px;
+    width: 200px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 0 18px 3px rgba(233,144,7,0.7);
+    margin : 30px;
+
+}
+
+
+.info {
+    height: 10%;
+    width: 100%;
+    padding-bottom:50px;
+    display: flex;
+    justify-content: center;
+}
+
+.prof {
+    font-size: 25px;
+    position: absolute;
+    top: 95px;
+    font-family: "Work Sans", sans-serif;
+    color: #555555;
+}
+
+.name {
+    font-size: 35px;
+    font-family: "Raleway",sans-serif;
+    color: #f79f08;
+    position: absolute;
+    letter-spacing: 2px;
+    font-weight: 600;
+    top: 50px;
+}
+
+.divider {
+    background-color: #949594;
+    height: 1.5px;
+    width: 120px;
+    position: absolute;
+    top: 130px;
+}
+
+.bio {
+    position: absolute;
+    top: 150px;
+    color: #949594;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Work Sans", sans-serif;
+    line-height: 28px;
+}
+
+button {
+    position: absolute;
+    bottom: 20px;
+    background-color: #f79f08;
+    font-size: 20px;
+    padding: 13px 25px;
+    color: white;
+    font-family: "Work Sans", sans-serif;
+    border-radius: 8px;
+}
+
+
+.card:hover {
+    border-radius: 50px;
+    transition: width 2s;
+    -webkit-transition: width 2s;
+    
+}
+
+
+.detSil{
+    padding-top:240px;
+    padding-left:28%;
+    visibility:hidden;
+}
+
+.card:hover .detSil{
+    visibility:visible;
+}
