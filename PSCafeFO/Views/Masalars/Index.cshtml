@@ -7,6 +7,18 @@
 
 
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#ucretGor").on("click", function (e) {
+            alert($("#gecenSure").text()+$("#ucretIndex").text());
+        });
+    });
+</script>
+
+
 <p style="padding-left:71%;">
     @Html.ActionLink("MASA EKLE", "Create", null, new { @class = "btn btn-success" })
 </p>
@@ -15,31 +27,123 @@
 
 @foreach (var item in Model)
 {
-<div class="card col-sm-3">
+    <div class="card col-sm-3">
 
-    <div class="info ">
-        <div class="name">MASA-@item.Id</div>
-        <div class="prof">@Html.DisplayFor(modelItem => item.MasaTuru)</div>
-        <div class="divider"></div>
-        <div class="bio">
-            AÇILIŞ   :  @(item.AcilisSaat.Value.ToString("hh.mm"))     <br />
-            KAPANIŞ  :  @(item.KapanisSaat.Value.ToString("hh.mm"))    <br /><br />
-            <strong>@(item.Durum == true ? "AÇIK" : "KAPALI")</strong> <br />
-        </div>
-        <button>@Html.ActionLink(item.Durum == true ? "MASA KAPAT" : "MASA AÇ","Edit", new { id = item.Id })</button>
-
-    </div>
-    <div class="detSil">
-        @Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
-
-        @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-    </div>
-   
+        <div class="info ">
+            <div class="name">MASA-@item.Id</div>
+            <div class="prof">@Html.DisplayFor(modelItem => item.MasaTuru)</div>
+            <div class="divider"></div>
+            <div class="bio">
 
 
+                @{ 
+                    int acilisSaati = item.AcilisSaat.Value.Hour;
+                    int kapanisSaati = item.KapanisSaat.Value.Hour;
+
+                    int acilisDk = item.AcilisSaat.Value.Minute;
+                    int kapanisDk = item.KapanisSaat.Value.Minute;
 
 
+                }
+
+
+                <p id="gecenSure">
+
+                    SÜRE<br />
+
+                    @if (kapanisSaati == acilisSaati && kapanisDk > acilisDk)
+                    {
+                        @(kapanisDk - acilisDk);
+
+                    }
+
+                    else if (kapanisSaati - acilisSaati == 1 && kapanisDk < acilisDk)
+                    {
+                        @(kapanisDk + acilisDk);
+                    }
+
+                    else if (kapanisSaati - acilisSaati == 1 && kapanisDk > acilisDk)
+                    {
+                        @(kapanisDk - acilisDk);
+                    }
+
+                    else if (kapanisSaati - acilisSaati > 1 && kapanisDk > acilisDk)
+                    {
+                        @((kapanisSaati - acilisSaati) + (kapanisDk - acilisDk))
+                    }
+                    // gün farkının olduğu alanlar
+                    else if ((item.KapanisSaat.Value.Day - item.AcilisSaat.Value.Day) == 1 && kapanisSaati < acilisSaati)
+                    {
+
+                        @((((item.KapanisSaat.Value.Day - item.AcilisSaat.Value.Day) - 1) * 24)  + (24 - (acilisSaati - kapanisSaati)))
+                    }
+
+                    else if (item.KapanisSaat.Value.Day != item.AcilisSaat.Value.Day && kapanisSaati > acilisSaati)
+                    {
+                        @(((item.KapanisSaat.Value.Day - item.AcilisSaat.Value.Day) * 24) + (kapanisSaati - acilisSaati))
+
+                    }
+
+                </p>
+
+
+
+
+                <p id="ucretIndex">
+                    UCRET  :
+
+                    @if (kapanisSaati == acilisSaati && kapanisDk > acilisDk)
+                    {
+                        @(((kapanisDk - acilisDk) / 15) * (item.Fiyat / 4));
+
+                    }
+
+                    else if (kapanisSaati - acilisSaati == 1 && kapanisDk < acilisDk)
+                    {
+                        @(((kapanisDk + acilisDk) / 15) * (item.Fiyat / 4));
+                    }
+
+                    else if (kapanisSaati - acilisSaati == 1 && kapanisDk > acilisDk)
+                    {
+                        @(((kapanisDk - acilisDk) / 15) * (item.Fiyat / 4));
+                    }
+
+                    else if (kapanisSaati - acilisSaati > 1 && kapanisDk > acilisDk)
+                    {
+                        @(((kapanisSaati - acilisSaati) * item.Fiyat) + ((kapanisDk - acilisDk) / 15) * (item.Fiyat / 4))
+                    }
+                    // gün farkının olduğu alanlar
+                    else if (item.KapanisSaat.Value.Day != item.AcilisSaat.Value.Day && kapanisSaati < acilisSaati)
+                    {
+
+                        @(((((item.KapanisSaat.Value.Day - item.AcilisSaat.Value.Day) - 1) * 24) * item.Fiyat) + (24 - (acilisSaati - kapanisSaati)) * item.Fiyat)
+                    }
+
+                    else if (item.KapanisSaat.Value.Day != item.AcilisSaat.Value.Day && kapanisSaati > acilisSaati)
+                    {
+                        @((((item.KapanisSaat.Value.Day - item.AcilisSaat.Value.Day) * 24) * item.Fiyat) + ((kapanisSaati - acilisSaati) * item.Fiyat))
+
+                    }
+
+
+
+                    <br />
+                    <strong>@(item.Durum == true ? "AÇIK" : "KAPALI")</strong> <br />
 </div>
+            <button id="ucretGor">@Html.ActionLink(item.Durum == true ? "MASA KAPAT" : "MASA AÇ", "Edit", new { id = item.Id })</button>
+
+        </div>
+        <div class="detSil">
+            @Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+            @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+        </div>
+
+
+
+
+
+    </div>
 }
 
 
