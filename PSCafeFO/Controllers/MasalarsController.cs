@@ -58,6 +58,14 @@ namespace PSCafeFO.Controllers
             return View(masalar);
         }
 
+
+
+
+
+
+
+
+
         // GET: Masalars/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,6 +97,28 @@ namespace PSCafeFO.Controllers
             return View(masalar);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: Masalars/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,6 +133,7 @@ namespace PSCafeFO.Controllers
             }
             return View(masalar);
         }
+
 
         // POST: Masalars/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -123,5 +154,7 @@ namespace PSCafeFO.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }
